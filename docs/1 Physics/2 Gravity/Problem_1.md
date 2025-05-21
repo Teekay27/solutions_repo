@@ -116,8 +116,12 @@ plt.show()
 
 # Verify with Moon data
 print(f"Moon: T = {T_moon/86400:.2f} days, r = {r_moon/1e6:.1f} Mm")
+
+# Verify with Moon data
+print(f"Moon: T = {T_moon/86400:.2f} days, r = {r_moon/1e6:.1f} Mm")
 ```
 ![alt text](image.png)
+
 
 *Notes on Code*:
 - **Function**: `orbital_period` computes $T = \sqrt{\frac{4\pi^2 r^3}{G M}}$.
