@@ -116,3 +116,40 @@ plt.show()
 
 # Verify with Moon data
 print(f"Moon: T = {T_moon/86400:.2f} days, r = {r_moon/1e6:.1f} Mm")
+```
+![alt text](image.png)
+
+*Notes on Code*:
+- **Function**: `orbital_period` computes $T = \sqrt{\frac{4\pi^2 r^3}{G M}}$.
+- **Data**: $r$ spans realistic ranges; $T$ calculated for Earth and Sun.
+- **Plots**:
+  - Left: Log-log $T^2$ vs. $r^3$—a straight line confirms $T^2 \propto r^3$.
+  - Right: Visualizes the Moon’s orbit as a circle.
+- **Verification**: Moon’s $T$ matches ~27 days.
+
+## Discussion on Extensions
+
+*Notes*: 
+- **Elliptical Orbits**: Kepler’s Third Law generalizes to $T^2 = \frac{4\pi^2}{G M} a^3$, where $a$ is the semi-major axis. The derivation uses angular momentum and energy conservation, not circular motion.
+- **Other Bodies**: Applies to binary stars (combined mass $M_1 + M_2$) or exoplanets, adjusting $M$.
+
+*Limitations*:
+- Assumes $M \gg m$ (central mass dominates).
+- Ignores perturbations (e.g., other planets).
+
+*Notes*: Elliptical extension broadens applicability to most orbits.
+
+---
+
+### Rendering and Running in VS Code
+- **File**: Save as `orbital_period.md`.
+- **Rendering**: Use "Markdown+Math" extension; preview with `Ctrl+Shift+V`.
+- **Code**: Extract to `orbital_period.py` or use a `.ipynb` with the "Jupyter" extension.
+- **Requirements**: Install `numpy`, `matplotlib` (`pip install numpy matplotlib`).
+
+### Output Notes
+- **Graph**: $T^2$ vs. $r^3$ is linear on a log-log scale, slope depends on $M$.
+- **Orbit**: Moon’s path is circular, visually confirming the setup.
+- **Moon Data**: $T \approx 27.32$ days matches reality.
+
+This solution fully explores Kepler’s Third Law with theory, examples, and simulation. 
