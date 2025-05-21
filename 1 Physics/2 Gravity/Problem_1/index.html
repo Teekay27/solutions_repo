@@ -223,84 +223,50 @@ Rearrange:
 <p><em>Notes</em>: Small discrepancies reflect measurement precision or circular orbit assumption.</p>
 <h2 id="4-implementation">4. Implementation</h2>
 <p><em>Notes</em>: We’ll simulate circular orbits and plot <span class="arithmatex">\(T^2\)</span> vs. <span class="arithmatex">\(r^3\)</span> to verify the law.</p>
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-
-# Constants
-G = 6.6743e-11  # m^3/kg·s^2
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants">Constants</h1>
+<p>G = 6.6743e-11  # m^3/kg·s^2
 M_earth = 5.972e24  # kg
-M_sun = 1.989e30  # kg
-
-# Orbital period function
-def orbital_period(r, M):
-    return np.sqrt((4 * np.pi**2 * r**3) / (G * M))
-
-# Orbital radii (m)
-r_values = np.logspace(6, 9, 100)  # 10^6 to 10^9 m
-
-# Compute periods
-T_earth = orbital_period(r_values, M_earth)  # Around Earth
-T_sun = orbital_period(r_values, M_sun)      # Around Sun
-
-# Plot T^2 vs r^3
-plt.figure(figsize=(12, 6))
-
-# Log-log plot
-plt.subplot(1, 2, 1)
-plt.loglog(r_values**3, T_earth**2, 'b-', label='Earth (M = 5.972e24 kg)')
-plt.loglog(r_values**3, T_sun**2, 'r-', label='Sun (M = 1.989e30 kg)')
+M_sun = 1.989e30  # kg</p>
+<h1 id="orbital-period-function">Orbital period function</h1>
+<p>def orbital_period(r, M):
+    return np.sqrt((4 * np.pi<strong>2 * r</strong>3) / (G * M))</p>
+<h1 id="orbital-radii-m">Orbital radii (m)</h1>
+<p>r_values = np.logspace(6, 9, 100)  # 10^6 to 10^9 m</p>
+<h1 id="compute-periods">Compute periods</h1>
+<p>T_earth = orbital_period(r_values, M_earth)  # Around Earth
+T_sun = orbital_period(r_values, M_sun)      # Around Sun</p>
+<h1 id="plot-t2-vs-r3">Plot T^2 vs r^3</h1>
+<p>plt.figure(figsize=(12, 6))</p>
+<h1 id="log-log-plot">Log-log plot</h1>
+<p>plt.subplot(1, 2, 1)
+plt.loglog(r_values<strong>3, T_earth</strong>2, 'b-', label='Earth (M = 5.972e24 kg)')
+plt.loglog(r_values<strong>3, T_sun</strong>2, 'r-', label='Sun (M = 1.989e30 kg)')
 plt.xlabel('r³ (m³)')
 plt.ylabel('T² (s²)')
 plt.title('T² vs r³ (Kepler\'s Third Law)')
 plt.grid(True, which="both", ls="--")
-plt.legend()
-
-# Circular orbit visualization (Moon example)
-r_moon = 3.844e8  # m
+plt.legend()</p>
+<h1 id="circular-orbit-visualization-moon-example">Circular orbit visualization (Moon example)</h1>
+<p>r_moon = 3.844e8  # m
 T_moon = orbital_period(r_moon, M_earth)
 theta = np.linspace(0, 2*np.pi, 100)
 x_moon = r_moon * np.cos(theta)
-y_moon = r_moon * np.sin(theta)
-
-plt.subplot(1, 2, 2)
+y_moon = r_moon * np.sin(theta)</p>
+<p>plt.subplot(1, 2, 2)
 plt.plot(x_moon, y_moon, 'b-', label=f'Moon Orbit (r = {r_moon/1e6:.1f} Mm)')
 plt.plot(0, 0, 'ko', label='Earth')
 plt.xlabel('x (m)')
 plt.ylabel('y (m)')
 plt.title('Circular Orbit Visualization')
 plt.axis('equal')
-plt.legend()
-
-plt.tight_layout()
-plt.show()
-
-# Verify with Moon data
-print(f"Moon: T = {T_moon/86400:.2f} days, r = {r_moon/1e6:.1f} Mm")
-</code></pre>
-<p><img alt="alt text" src="image.png"/></p>
-<p><em>Notes on Code</em>:
-- <strong>Function</strong>: <code>orbital_period</code> computes <span class="arithmatex">\(T = \sqrt{\frac{4\pi^2 r^3}{G M}}\)</span>.
-- <strong>Data</strong>: <span class="arithmatex">\(r\)</span> spans realistic ranges; <span class="arithmatex">\(T\)</span> calculated for Earth and Sun.
-- <strong>Plots</strong>:
-  - Left: Log-log <span class="arithmatex">\(T^2\)</span> vs. <span class="arithmatex">\(r^3\)</span>—a straight line confirms <span class="arithmatex">\(T^2 \propto r^3\)</span>.
-  - Right: Visualizes the Moon’s orbit as a circle.
-- <strong>Verification</strong>: Moon’s <span class="arithmatex">\(T\)</span> matches ~27 days.</p>
-<h2 id="discussion-on-extensions">Discussion on Extensions</h2>
-<p><em>Notes</em>: 
-- <strong>Elliptical Orbits</strong>: Kepler’s Third Law generalizes to <span class="arithmatex">\(T^2 = \frac{4\pi^2}{G M} a^3\)</span>, where <span class="arithmatex">\(a\)</span> is the semi-major axis. The derivation uses angular momentum and energy conservation, not circular motion.
-- <strong>Other Bodies</strong>: Applies to binary stars (combined mass <span class="arithmatex">\(M_1 + M_2\)</span>) or exoplanets, adjusting <span class="arithmatex">\(M\)</span>.</p>
-<p><em>Limitations</em>:
-- Assumes <span class="arithmatex">\(M \gg m\)</span> (central mass dominates).
-- Ignores perturbations (e.g., other planets).</p>
-<p><em>Notes</em>: Elliptical extension broadens applicability to most orbits.</p>
-<hr/>
-<h3 id="output-notes">Output Notes</h3>
-<ul>
-<li><strong>Graph</strong>: <span class="arithmatex">\(T^2\)</span> vs. <span class="arithmatex">\(r^3\)</span> is linear on a log-log scale, slope depends on <span class="arithmatex">\(M\)</span>.</li>
-<li><strong>Orbit</strong>: Moon’s path is circular, visually confirming the setup.</li>
-<li><strong>Moon Data</strong>: <span class="arithmatex">\(T \approx 27.32\)</span> days matches reality.</li>
-</ul>
-<p>This solution fully explores Kepler’s Third Law with theory, examples, and simulation. </p>
+plt.legend()</p>
+<p>plt.tight_layout()
+plt.show()</p>
+<h1 id="verify-with-moon-data">Verify with Moon data</h1>
+<p>print(f"Moon: T = {T_moon/86400:.2f} days, r = {r_moon/1e6:.1f} Mm")</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
