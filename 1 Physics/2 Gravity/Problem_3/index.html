@@ -172,6 +172,269 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-3">Problem 3</h1>
+<h1 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h1>
+<h2 id="1-analysis-of-possible-trajectories">1. Analysis of Possible Trajectories</h2>
+<p><em>Notes</em>: When a payload is released from a moving rocket near Earth, its path depends on its starting position, speed, direction, and Earth’s gravity. Let’s explore the possible paths it might take.</p>
+<ul>
+<li>
+<p><strong>Types of Trajectories</strong>: The path of an object under gravity is a conic section, determined by its energy:</p>
+</li>
+<li>
+<p><strong>Elliptical</strong>: If the payload doesn’t have enough energy to escape Earth, it follows a closed, oval-shaped (elliptical) orbit, like a satellite circling Earth.</p>
+</li>
+<li><strong>Parabolic</strong>: If the payload has just enough energy to escape, it follows a parabolic path, reaching infinity (far away) with no speed left.</li>
+<li>
+<p><strong>Hyperbolic</strong>: If the payload has extra energy, it escapes Earth on a hyperbolic path, moving away forever with some speed remaining.</p>
+</li>
+<li>
+<p><strong>What Affects the Path</strong>:</p>
+</li>
+<li>
+<p><strong>Starting Position</strong>: How high above Earth and how far from Earth’s center.</p>
+</li>
+<li>
+<p><strong>Starting Velocity</strong>: How fast it’s going and in what direction.</p>
+</li>
+<li>
+<p><strong>Earth’s Gravity</strong>: Pulls the payload toward the center, shaping its path.</p>
+</li>
+</ul>
+<p><em>Notes</em>: To determine the trajectory, we’ll calculate the payload’s energy and compare its speed to the escape speed at its position.</p>
+<h2 id="2-mathematical-derivation-of-trajectories">2. Mathematical Derivation of Trajectories</h2>
+<p><em>Notes</em>: Let’s set up the math to describe the payload’s motion using gravity and physics principles.</p>
+<ul>
+<li><strong>Gravity Force</strong>: Earth pulls the payload toward its center. The force on the payload (mass <span class="arithmatex">\(m\)</span>) at distance <span class="arithmatex">\(r\)</span> from Earth’s center (mass <span class="arithmatex">\(M\)</span>) is given by Newton’s law of gravitation:</li>
+</ul>
+<p><span class="arithmatex">\(<span class="arithmatex">\(F = \frac{G M m}{r^2}\)</span>\)</span></p>
+<p>Here, <span class="arithmatex">\(G\)</span> is the gravitational constant.</p>
+<ul>
+<li><strong>Motion Equations</strong>: We’ll use coordinates  </li>
+</ul>
+<p><span class="arithmatex">\((x, y)\)</span> </p>
+<p>in a 2D plane, with Earth at <span class="arithmatex">\((0, 0)\)</span>. The distance 
+  <span class="arithmatex">\(r\)</span> is:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(r = \sqrt{x^2 + y^2}\)</span>\)</span></p>
+<p>The gravitational force causes acceleration toward the center, split into </p>
+<p><span class="arithmatex">\(x\)</span> and
+   <span class="arithmatex">\(y\)</span> directions:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(a_x = -\frac{G M x}{r^3}, \quad a_y = -\frac{G M y}{r^3}\)</span>\)</span></p>
+<p>This gives us equations for how <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> change over time:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(\frac{d^2 x}{dt^2} = -\frac{G M x}
+  {(x^2 + y^2)^{3/2}}, \quad \frac{d^2 y}
+  {dt^2} = -\frac{G M y}{(x^2 + y^2)^{3/2}}\)</span>\)</span></p>
+<ul>
+<li><strong>Energy to Classify the Path</strong>: We can determine the trajectory by calculating the specific energy </li>
+</ul>
+<p><span class="arithmatex">\(\epsilon\)</span>
+ (energy per unit mass):
+  - Speed: <span class="arithmatex">\(v = \sqrt{v_x^2 + v_y^2}\)</span>, where <span class="arithmatex">\(v_x\)</span> and <span class="arithmatex">\(v_y\)</span> are the velocities in the <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> directions.</p>
+<ul>
+<li>
+<p>Kinetic energy per unit mass: <span class="arithmatex">\(\frac{1}{2} v^2\)</span>.</p>
+</li>
+<li>
+<p>Potential energy per unit mass: <span class="arithmatex">\(-\frac{G M}{r}\)</span>.</p>
+</li>
+<li>
+<p>Total specific energy:
+    <span class="arithmatex">\(<span class="arithmatex">\(\epsilon = \frac{1}{2} v^2 - \frac{G M}{r}\)</span>\)</span></p>
+</li>
+<li>
+<p>Trajectory type:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(\epsilon &lt; 0\)</span>: Elliptical (bound orbit).</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\epsilon = 0\)</span>: Parabolic (just escapes).</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\epsilon &gt; 0\)</span>: Hyperbolic (escapes with extra speed).</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Escape Velocity</strong>: The speed needed to just escape (parabolic trajectory) at distance</p>
+</li>
+</ul>
+<p><span class="arithmatex">\(r\)</span> is when <span class="arithmatex">\(\epsilon = 0\)</span>:
+  <span class="arithmatex">\(<span class="arithmatex">\(\frac{1}{2} v_{\text{esc}}^2 - \frac{G M}{r} = 0 \implies v_{\text{esc}} = \sqrt{\frac{2 G M}{r}}\)</span>\)</span></p>
+<p><em>Notes</em>: These equations are complex to solve analytically, so we’ll use numerical methods to simulate the payload’s path.</p>
+<h2 id="3-numerical-analysis-setup">3. Numerical Analysis Setup</h2>
+<p><em>Notes</em>: Let’s define the starting conditions for the payload to simulate different trajectories.</p>
+<ul>
+<li><strong>Starting Altitude</strong>: The payload is released 400 km above Earth’s surface, a typical altitude for low Earth orbit (like the International Space Station).</li>
+<li>Earth’s radius:</li>
+</ul>
+<p><span class="arithmatex">\(R = 6,371\)</span> km = <span class="arithmatex">\(6.371 \times 10^6\)</span> m.</p>
+<ul>
+<li>
+<p>Distance from Earth’s center: <span class="arithmatex">\(r = 6,371 + 400 = 6,771\)</span> km = <span class="arithmatex">\(6.771 \times 10^6\)</span> m.</p>
+</li>
+<li>
+<p><strong>Starting Position</strong>: We’ll place the payload at </p>
+</li>
+</ul>
+<p><span class="arithmatex">\((x, y) = (6.771 \times 10^6, 0)\)</span> m, </p>
+<p>meaning it’s 6,771 km along the x-axis from Earth’s center.
+- <strong>Starting Velocity</strong>: We’ll test three speeds to get different trajectories, all in the y-direction (tangential to Earth’s surface, like an orbit):
+  - <strong>Elliptical</strong>: Speed equal to the circular orbit speed at this altitude.
+  - <strong>Parabolic</strong>: Speed equal to the escape velocity.
+  - <strong>Hyperbolic</strong>: Speed greater than the escape velocity.
+- <strong>Earth’s Data</strong>:</p>
+<ul>
+<li>
+<p>Mass: <span class="arithmatex">\(M = 5.972 \times 10^{24}\)</span> kg.</p>
+</li>
+<li>
+<p>Gravitational constant: <span class="arithmatex">\(G = 6.6743 \times 10^{-11}\)</span> m³/kg·s².</p>
+</li>
+<li>
+<p><strong>Local Escape Velocity</strong> (second cosmic velocity at this altitude):
+  The escape velocity at distance <span class="arithmatex">\(r\)</span> is:</p>
+</li>
+</ul>
+<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{esc}} = \sqrt{\frac{2 G M}{r}}\)</span>\)</span></p>
+<p>Substitute the values:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{esc}} = \sqrt{\frac{2 \times (6.6743 \times 10^{-11}) \times (5.972 \times 10^{24})}{6.771 \times 10^6}}\)</span>\)</span></p>
+<p>Numerator:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(2 \times 6.6743 \times 10^{-11} \times 5.972 \times 10^{24} = 7.978 \times 10^{14}\)</span>\)</span></p>
+<p>Fraction:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(\frac{7.978 \times 10^{14}}{6.771 \times 10^6} \approx 1.178 \times 10^8\)</span>\)</span></p>
+<p>Square root:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{esc}} = \sqrt{1.178 \times 10^8} \approx 10,853 \, \text{m/s} = 10.85 \, \text{km/s}\)</span>\)</span></p>
+<ul>
+<li><strong>Circular Orbit Velocity</strong> (first cosmic velocity at this altitude):
+  The speed for a circular orbit at distance </li>
+</ul>
+<p><span class="arithmatex">\(r\)</span> is:
+  <span class="arithmatex">\(<span class="arithmatex">\(v_{\text{circ}} = \sqrt{\frac{G M}{r}}\)</span>\)</span></p>
+<p>Substitute the values:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{circ}} = \sqrt{\frac{(6.6743 \times 10^{-11}) \times (5.972 \times 10^{24})}{6.771 \times 10^6}}\)</span>\)</span></p>
+<p>Numerator:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(6.6743 \times 10^{-11} \times 5.972 \times 10^{24} = 3.989 \times 10^{14}\)</span>\)</span></p>
+<p>Fraction:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(\frac{3.989 \times 10^{14}}{6.771 \times 10^6} \approx 5.892 \times 10^7\)</span>\)</span></p>
+<p>Square root:</p>
+<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{circ}} = \sqrt{5.892 \times 10^7} \approx 7,676 \, \text{m/s} = 7.68 \, \text{km/s}\)</span>\)</span></p>
+<p><em>Notes</em>: We’ll simulate three trajectories:
+- Elliptical: 7.68 km/s (circular orbit speed).
+- Parabolic: 10.85 km/s (escape speed).
+- Hyperbolic: 12 km/s (above escape speed).</p>
+<h2 id="4-implementation">4. Implementation</h2>
+<p><em>Notes</em>: We’ll use Python to numerically solve the motion equations and plot the trajectories.</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+# Constants
+G = 6.6743e-11  # m^3/kg·s^2 (gravitational constant)
+M_earth = 5.972e24  # kg (Earth's mass)
+R_earth = 6.371e6  # m (Earth's radius)
+
+# Initial conditions
+altitude = 400e3  # 400 km above Earth's surface
+r0 = R_earth + altitude  # Distance from Earth's center
+v_circ = np.sqrt(G * M_earth / r0)  # Circular orbit speed
+v_esc = np.sqrt(2 * G * M_earth / r0)  # Escape velocity
+
+# Test three velocities: elliptical, parabolic, hyperbolic
+velocities = [v_circ, v_esc, 12e3]  # m/s (7.68 km/s, 10.85 km/s, 12 km/s)
+labels = ['Elliptical (v = 7.68 km/s)', 'Parabolic (v = 10.85 km/s)', 'Hyperbolic (v = 12 km/s)']
+
+# Time array (simulate for 2 hours)
+t = np.linspace(0, 7200, 1000)
+
+# Differential equations: state = [x, y, vx, vy]
+def equations(state, t, G, M):
+    x, y, vx, vy = state
+    r = np.sqrt(x**2 + y**2)
+    ax = -G * M * x / r**3
+    ay = -G * M * y / r**3
+    return [vx, vy, ax, ay]
+
+# Simulate trajectories for each velocity
+trajectories = []
+for v in velocities:
+    # Initial state: start at (r0, 0) with velocity in y-direction
+    state0 = [r0, 0, 0, v]
+    sol = odeint(equations, state0, t, args=(G, M_earth))
+    trajectories.append(sol)
+
+# Plotting
+plt.figure(figsize=(10, 8))
+
+# Draw Earth as a circle
+theta = np.linspace(0, 2*np.pi, 100)
+x_earth = R_earth * np.cos(theta)
+y_earth = R_earth * np.sin(theta)
+plt.plot(x_earth, y_earth, 'b-', label='Earth')
+
+# Plot each trajectory
+for i, traj in enumerate(trajectories):
+    x, y = traj[:, 0], traj[:, 1]
+    plt.plot(x, y, label=labels[i])
+
+plt.xlabel('x (m)')
+plt.ylabel('y (m)')
+plt.title('Payload Trajectories Near Earth (Released at 400 km Altitude)')
+plt.axis('equal')  # Make the plot look circular
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Check the specific energy to confirm trajectory types
+for i, v in enumerate(velocities):
+    r = r0
+    epsilon = 0.5 * v**2 - G * M_earth / r
+    print(f"{labels[i]}:")
+    print(f"  Speed: {v/1000:.2f} km/s")
+    print(f"  Specific Energy: {epsilon:.2e} J/kg")
+    print(f"  Trajectory: {'Elliptical' if epsilon &lt; 0 else 'Parabolic' if abs(epsilon) &lt; 1e3 else 'Hyperbolic'}")
+</code></pre>
+<p><img alt="alt text" src="image-3.png"/></p>
+<p><em>Notes on Code</em>:
+- <strong>Setup</strong>: Defines Earth’s properties and the payload’s starting position at 400 km altitude.
+- <strong>Velocities</strong>: Tests three speeds: circular orbit speed (7.68 km/s), escape speed (10.85 km/s), and a higher speed (12 km/s).
+- <strong>Simulation</strong>: Uses <code>odeint</code> to solve the motion equations numerically, tracking the payload’s position over time.
+- <strong>Plot</strong>: Shows Earth as a blue circle and the three trajectories in different colors.
+- <strong>Energy Check</strong>: Calculates the specific energy to confirm whether each path is elliptical, parabolic, or hyperbolic.</p>
+<h2 id="5-relation-to-space-scenarios">5. Relation to Space Scenarios</h2>
+<p><em>Notes</em>: Let’s connect these trajectories to real space missions:
+- <strong>Orbital Insertion</strong>: The elliptical trajectory (speed = 7.68 km/s) shows the payload entering a stable orbit around Earth, like a satellite being deployed. This speed matches the circular orbit speed at 400 km, so it forms a circular orbit (a special kind of ellipse).
+- <strong>Reentry</strong>: If the speed were lower than 7.68 km/s, the payload would fall back toward Earth, possibly reentering the atmosphere (we didn’t include air resistance here, so this isn’t shown).
+- <strong>Escape</strong>: The parabolic (10.85 km/s) and hyperbolic (12 km/s) trajectories show the payload escaping Earth’s gravity, which is what you’d want for a mission to the Moon, Mars, or beyond.</p>
+<p><em>Notes</em>: Understanding these paths helps space engineers plan missions, like releasing satellites into orbit or sending probes to other planets.</p>
+<h2 id="discussion-on-extensions">Discussion on Extensions</h2>
+<p><em>Notes</em>: Here are some ways to make this simulation more realistic:
+- <strong>Air Resistance</strong>: If the payload gets too close to Earth, air resistance would slow it down and heat it up, affecting reentry paths.
+- <strong>Earth’s Rotation</strong>: Earth’s spin gives the payload an extra starting speed depending on the launch location, which could change the trajectory.
+- <strong>Other Forces</strong>: In real missions, things like the Sun’s gravity, solar radiation, or the Moon’s pull can nudge the payload off its path.</p>
+<p><em>Notes</em>: This simulation gives us a starting point to understand how payloads move, which is super important for planning space missions like satellite launches or trips to other planets.</p>
+<hr/>
+<h3 id="rendering-and-running-in-vs-code">Rendering and Running in VS Code</h3>
+<ul>
+<li><strong>File</strong>: Save as <code>payload_trajectories.md</code>.</li>
+<li><strong>Rendering</strong>: Use the "Markdown+Math" extension; preview with <code>Ctrl+Shift+V</code> to see equations like <span class="arithmatex">\(v_{\text{esc}}\)</span> and <span class="arithmatex">\(<span class="arithmatex">\(F\)</span>\)</span>.</li>
+<li><strong>Code</strong>: Extract the Python code to <code>payload_trajectories.py</code> or use a <code>.ipynb</code> file with the "Jupyter" extension.</li>
+<li><strong>Requirements</strong>: Install <code>numpy</code>, <code>matplotlib</code>, and <code>scipy</code> (<code>pip install numpy matplotlib scipy</code>).</li>
+</ul>
+<h3 id="output-notes">Output Notes</h3>
+<ul>
+<li><strong>Plot</strong>: The graph shows:</li>
+<li>Earth as a blue circle.</li>
+<li>Three trajectories:<ul>
+<li><strong>Elliptical</strong>: A closed loop (a circular orbit in this case).</li>
+<li><strong>Parabolic</strong>: A path that curves away, just escaping.</li>
+<li><strong>Hyperbolic</strong>: A path that curves away more sharply, escaping with extra speed.</li>
+</ul>
+</li>
+<li><strong>Energy Results</strong>:</li>
+<li>Elliptical: Negative energy (bound to Earth).</li>
+<li>Parabolic: Energy near zero (just escapes).</li>
+<li>Hyperbolic: Positive energy (escapes easily).</li>
+</ul>
+<p>This solution explains the payload’s possible paths in a simple way, with clear math, a simulation, and pictures to show what happens. It’s all set for you to copy and paste! Let me know if you’d like to try different starting speeds or add more features.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
