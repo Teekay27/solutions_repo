@@ -172,6 +172,197 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="interference-patterns-on-a-water-surface">Interference Patterns on a Water Surface</h1>
+<h2 id="1-problem-setup-and-wave-equation">1. Problem Setup and Wave Equation</h2>
+<p><em>Notes</em>: We’re tasked with analyzing the interference patterns created by circular waves on a water surface, emitted from point sources at the vertices of a regular polygon. Let’s break this down step by step.</p>
+<p>The wave from a single point source at position
+ <span class="arithmatex">\((x_s, y_s)\)</span> 
+ is given by the Single Disturbance equation:</p>
+<p><span class="arithmatex">\(h(x, y, t) = A \cos(k r - \omega t + \phi)\)</span></p>
+<p>where:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(h(x, y, t)\)</span> is the displacement of the water surface at point <span class="arithmatex">\((x, y)\)</span> and time <span class="arithmatex">\(t\)</span>,</p>
+</li>
+<li>
+<p><span class="arithmatex">\(A\)</span> is the amplitude of the wave,</p>
+</li>
+<li>
+<p><span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span> is the wave number, with <span class="arithmatex">\(\lambda\)</span> being the wavelength,</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\omega = 2\pi f\)</span> is the angular frequency, with <span class="arithmatex">\(f\)</span> being the frequency,</p>
+</li>
+<li>
+<p><span class="arithmatex">\(r = \sqrt{(x - x_s)^2 + (y - y_s)^2}\)</span> is the distance from the source to the point <span class="arithmatex">\((x, y)\)</span>,</p>
+</li>
+</ul>
+<h1 id="interference-patterns-on-a-water-surface_1">Interference Patterns on a Water Surface</h1>
+<p>Interference occurs when waves from different sources overlap. On a water surface, this can be seen when ripples from various points meet and form patterns—constructive interference where waves reinforce each other, and destructive interference where they cancel out. These visual patterns help us understand wave behavior and interactions in a tangible way.</p>
+<p>A single circular wave on the water surface from a point source is modeled as:</p>
+<div class="arithmatex">\[
+\eta(x, y, t) = \frac{A}{\sqrt{r}} \cdot \cos(kr - \omega t + \phi)
+\]</div>
+<p>Where:<br/>
+- <span class="arithmatex">\( \eta(x, y, t) \)</span> is the displacement of the water surface at point <span class="arithmatex">\( (x, y) \)</span> and time <span class="arithmatex">\( t \)</span>,<br/>
+- <span class="arithmatex">\( A \)</span> is the amplitude of the wave,<br/>
+- <span class="arithmatex">\( r \)</span> is the distance from the source to point <span class="arithmatex">\( (x, y) \)</span>,<br/>
+- <span class="arithmatex">\( k = \frac{2\pi}{\lambda} \)</span> is the wave number,<br/>
+- <span class="arithmatex">\( \omega = 2\pi f \)</span> is the angular frequency,<br/>
+- <span class="arithmatex">\( \phi \)</span> is the phase offset.</p>
+<p>Now, suppose we place point sources at the vertices of a regular polygon (like a square or triangle). Each source emits a wave described by the equation above. The principle of superposition tells us that the total displacement at any point is the sum of displacements from each source:</p>
+<div class="arithmatex">\[
+\eta_{\text{total}}(x, y, t) = \sum_{i=1}^{N} \frac{A}{\sqrt{r_i}} \cdot \cos(k r_i - \omega t + \phi)
+\]</div>
+<p>Where <span class="arithmatex">\( r_i \)</span> is the distance from the <span class="arithmatex">\( i \)</span>-th source to the point <span class="arithmatex">\( (x, y) \)</span>, and <span class="arithmatex">\( N \)</span> is the number of sources.</p>
+<p>This superposition results in a complex interference pattern that depends on the number and position of the sources.</p>
+<p>To visualize this, we can simulate the system using Python. Here's the code:</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+A = 1.0  # Amplitude
+wavelength = 1.0
+k = 2 * np.pi / wavelength  # Wave number
+omega = 2 * np.pi  # Angular frequency
+phi = 0  # Phase
+t = 0  # Time snapshot
+
+# Grid
+x = np.linspace(-5, 5, 500)
+y = np.linspace(-5, 5, 500)
+X, Y = np.meshgrid(x, y)
+
+# Define number of sources and polygon radius
+N = 4  # Number of sources (e.g., square)
+radius = 2.5
+angles = np.linspace(0, 2 * np.pi, N, endpoint=False)
+sources = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]
+
+# Initialize displacement
+eta_total = np.zeros_like(X)
+
+# Superpose waves from each source
+for sx, sy in sources:
+    R = np.sqrt((X - sx)**2 + (Y - sy)**2)
+    eta = A / np.sqrt(R + 1e-6) * np.cos(k * R - omega * t + phi)
+    eta_total += eta
+
+# Plot the interference pattern
+plt.figure(figsize=(8, 6))
+plt.contourf(X, Y, eta_total, levels=100, cmap='plasma')
+plt.colorbar(label='Water Surface Displacement')
+plt.title('Water Wave Interference Pattern from Regular Polygon Sources')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.axis('equal')
+plt.show()
+
+
+
+*Notes*: This equation gives the combined wave displacement. The interference pattern depends on the differences in $r_i$, which affect the phase $k r_i$ at each point.
+
+## 6. Step 5: Analyze Interference Patterns
+
+*Notes*: Let’s understand what creates the interference pattern:
+- **Constructive Interference**: Occurs when the waves are in phase, meaning the phase difference $k (r_i - r_j)$ between any two waves is a multiple of $2\pi$. This happens when the path difference $r_i - r_j$ is a multiple of the wavelength $\lambda$ (since $k = \frac{2\pi}{\lambda}$, so $k (r_i - r_j) = 2\pi \frac{r_i - r_j}{\lambda}$). The waves add up, making the displacement larger.
+
+
+- **Destructive Interference**: Occurs when the waves are out of phase by $\pi$ (180 degrees), so the phase difference $k (r_i - r_j) = (2n+1)\pi$. This happens when the path difference is an odd multiple of $\lambda/2$. The waves cancel out, making the displacement zero.
+
+
+
+*Notes*: The pattern will be symmetric because the square is symmetric. We expect:
+- High displacement (constructive) where the distances from the sources allow the waves to align.
+- Low or zero displacement (destructive) where the waves cancel out.
+
+
+
+## 7. Step 6: Visualization with Python
+
+*Notes*: We’ll use Python to simulate the interference pattern on a 2D grid at a fixed time $t$. Let’s choose some values:
+- Amplitude: $A = 1$ m.
+- Wavelength: $\lambda = 0.5$ m, so $k = \frac{2\pi}{\lambda} = \frac{2\pi}{0.5} \approx 12.566$ rad/m.
+- Frequency: $f = 1$ Hz, so $\omega = 2\pi f = 2\pi \approx 6.283$ rad/s.
+- Time: $t = 0$ s (to see the initial pattern; we can animate later if needed).
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+A = 1.0  # Amplitude (m)
+lambda_ = 0.5  # Wavelength (m)
+k = 2 * np.pi / lambda_  # Wave number (rad/m)
+f = 1.0  # Frequency (Hz)
+omega = 2 * np.pi * f  # Angular frequency (rad/s)
+t = 0.0  # Time (s)
+
+# Source positions (vertices of a square with side length 2, so a = 1)
+sources = [(1, 1), (1, -1), (-1, -1), (-1, 1)]
+
+# Create a grid of points
+x = np.linspace(-3, 3, 200)  # x from -3 to 3 meters
+y = np.linspace(-3, 3, 200)  # y from -3 to 3 meters
+X, Y = np.meshgrid(x, y)
+
+# Calculate the total displacement
+H = np.zeros_like(X)  # Total displacement
+for (xs, ys) in sources:
+    r = np.sqrt((X - xs)**2 + (Y - ys)**2)  # Distance from source to point
+    H += A * np.cos(k * r - omega * t)  # Add wave from this source
+
+# Plotting
+plt.figure(figsize=(8, 6))
+plt.contourf(X, Y, H, levels=50, cmap='seismic')  # Contour plot with color
+plt.colorbar(label='Displacement (m)')
+plt.contour(X, Y, H, levels=[0], colors='black')  # Zero displacement lines (destructive)
+plt.scatter([s[0] for s in sources], [s[1] for s in sources], c='black', marker='o', label='Sources')
+plt.xlabel('x (m)')
+plt.ylabel('y (m)')
+plt.title('Interference Pattern from Four Sources (Square)')
+plt.axis('equal')
+plt.legend()
+plt.grid(True)
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="image.png"/></p>
+<p><em>Notes on Code</em>:
+- <strong>Setup</strong>: Defines the wave parameters and positions of the four sources at the square’s vertices.
+- <strong>Grid</strong>: Creates a 2D grid of points <span class="arithmatex">\((x, y)\)</span> to calculate the displacement.
+- <strong>Superposition</strong>: Sums the displacement from each source at every point on the grid.
+- <strong>Plot</strong>: Uses a contour plot to show the displacement, with colors indicating amplitude (red for positive, blue for negative). Black lines show where displacement is zero (destructive interference). Black dots mark the sources.</p>
+<h2 id="8-explanation-of-interference-patterns">8. Explanation of Interference Patterns</h2>
+<p><em>Notes</em>: Let’s analyze the plot:
+- <strong>Constructive Interference</strong>: Bright red or blue areas show where the displacement is large (positive or negative). This happens where the waves from the sources arrive in phase, like along the axes (<span class="arithmatex">\(x = 0\)</span> or <span class="arithmatex">\(y = 0\)</span>), where the distances from opposite sources are equal, so the path difference is zero.
+- <strong>Destructive Interference</strong>: Black lines show where the displacement is zero. This happens where waves cancel out, like where the path difference between sources is <span class="arithmatex">\(\lambda/2\)</span> (0.25 m), causing a phase difference of <span class="arithmatex">\(\pi\)</span>.
+- <strong>Symmetry</strong>: The pattern is symmetric about the x-axis, y-axis, and diagonals, because the square is symmetric.
+- <strong>Nodal Lines</strong>: The black lines form a grid-like pattern, showing regions where destructive interference creates “calm” spots on the water.</p>
+<p><em>Notes</em>: The pattern looks like a checkerboard, with alternating regions of high and low displacement, typical of interference from multiple coherent sources.</p>
+<h2 id="discussion-on-extensions">Discussion on Extensions</h2>
+<p><em>Notes</em>:
+- <strong>Different Polygons</strong>: A triangle (3 sources) would create a simpler pattern, while a pentagon (5 sources) would be more complex, with more interference points.
+- <strong>Animation</strong>: We could vary <span class="arithmatex">\(t\)</span> to animate the waves, showing how the pattern moves over time.
+- <strong>Phase Differences</strong>: If the sources had different initial phases <span class="arithmatex">\(\phi\)</span>, the pattern would shift, changing where constructive and destructive regions occur.
+- <strong>Real-World Applications</strong>: This interference is similar to what happens in acoustics (sound waves), optics (light waves), or even quantum mechanics (wavefunctions), helping us design things like antennas or predict wave behavior in nature.</p>
+<p><em>Notes</em>: This simulation helps us see how waves combine, a key idea in physics with applications from water waves to technology.</p>
+<hr/>
+<h3 id="rendering-and-running-in-vs-code">Rendering and Running in VS Code</h3>
+<ul>
+<li><strong>File</strong>: Save as <code>interference_patterns.md</code>.</li>
+<li><strong>Rendering</strong>: Use the "Markdown+Math" extension; preview with <code>Ctrl+Shift+V</code> to see equations like <span class="arithmatex">\(h(x, y, t)\)</span> and <span class="arithmatex">\(<span class="arithmatex">\(k\)</span>\)</span>.</li>
+<li><strong>Code</strong>: Extract the Python code to <code>interference_patterns.py</code> or use a <code>.ipynb</code> file with the "Jupyter" extension.</li>
+<li><strong>Requirements</strong>: Install <code>numpy</code> and <code>matplotlib</code> (<code>pip install numpy matplotlib</code>).</li>
+</ul>
+<h3 id="output-notes">Output Notes</h3>
+<ul>
+<li><strong>Plot</strong>: The contour plot shows:</li>
+<li>Red and blue regions: High displacement (constructive interference).</li>
+<li>Black lines: Zero displacement (destructive interference).</li>
+<li>Black dots: The four sources at the square’s vertices.</li>
+<li><strong>Pattern</strong>: A symmetric, grid-like pattern with alternating high and low displacement areas, showing how the waves interfere.</li>
+</ul>
+<p>This solution explains wave interference in a simple way, with clear math, a simulation, and a visual representation of the pattern. It’s all set for you to copy and paste! Let me know if you’d like to try a different polygon or add animation.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
