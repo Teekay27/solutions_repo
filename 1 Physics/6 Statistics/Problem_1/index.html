@@ -172,6 +172,146 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="exploring-the-central-limit-theorem-through-simulations">Exploring the Central Limit Theorem through Simulations</h1>
+<h2 id="1-simulating-sampling-distributions">1. Simulating Sampling Distributions</h2>
+<p><em>Notes</em>: The Central Limit Theorem (CLT) states that the distribution of the sample mean <span class="arithmatex">\(\bar{X}\)</span> of a sufficiently large number of independent, identically distributed (i.i.d.) random variables will approximate a normal distribution, regardless of the population distribution, as the sample size <span class="arithmatex">\(n\)</span> increases. Mathematically, for a population with mean <span class="arithmatex">\(\mu\)</span> and variance <span class="arithmatex">\(\sigma^2\)</span>, the sample mean <span class="arithmatex">\(\bar{X}\)</span> of a sample of size <span class="arithmatex">\(n\)</span> will have:
+- Mean: <span class="arithmatex">\(\mu_{\bar{X}} = \mu\)</span>
+- Variance: <span class="arithmatex">\(\sigma_{\bar{X}}^2 = \frac{\sigma^2}{n}\)</span>
+- Distribution: Approximately normal for large <span class="arithmatex">\(n\)</span>, i.e., <span class="arithmatex">\(\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)\)</span>.</p>
+<p>Let’s simulate this by generating populations from three different distributions:
+- <strong>Uniform Distribution</strong>: A flat distribution over a range.
+- <strong>Exponential Distribution</strong>: A skewed distribution, often used for time-to-event data.
+- <strong>Binomial Distribution</strong>: A discrete distribution for successes in trials.</p>
+<h3 id="population-parameters">Population Parameters</h3>
+<ul>
+<li><strong>Uniform</strong>: Range <span class="arithmatex">\([0, 10]\)</span>, so <span class="arithmatex">\(\mu = \frac{0 + 10}{2} = 5\)</span>, <span class="arithmatex">\(\sigma^2 = \frac{(10 - 0)^2}{12} = \frac{100}{12} \approx 8.33\)</span>.</li>
+<li><strong>Exponential</strong>: Rate parameter <span class="arithmatex">\(\lambda = 1\)</span>, so <span class="arithmatex">\(\mu = \frac{1}{\lambda} = 1\)</span>, <span class="arithmatex">\(\sigma^2 = \frac{1}{\lambda^2} = 1\)</span>.</li>
+<li><strong>Binomial</strong>: <span class="arithmatex">\(n_{\text{trials}} = 10\)</span>, probability <span class="arithmatex">\(p = 0.5\)</span>, so <span class="arithmatex">\(\mu = n_{\text{trials}} \cdot p = 5\)</span>, <span class="arithmatex">\(\sigma^2 = n_{\text{trials}} \cdot p \cdot (1 - p) = 10 \cdot 0.5 \cdot 0.5 = 2.5\)</span>.</li>
+</ul>
+<p><em>Notes</em>: We’ll generate a large dataset (e.g., 100,000 data points) for each population to represent the “true” population.</p>
+<h2 id="2-sampling-and-visualization">2. Sampling and Visualization</h2>
+<p><em>Notes</em>: For each distribution, we’ll:
+- Draw random samples of sizes <span class="arithmatex">\(n = 5, 10, 30, 50\)</span>.
+- Compute the sample mean for each sample.
+- Repeat this process 10,000 times to build the sampling distribution of the sample mean.
+- Plot histograms to observe the shape as <span class="arithmatex">\(n\)</span> increases.</p>
+<h2 id="3-implementation-in-python">3. Implementation in Python</h2>
+<p><em>Notes</em>: We’ll use Python with <code>numpy</code> for random number generation, <code>matplotlib</code> for plotting, and <code>seaborn</code> for better histogram visuals.</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set random seed for reproducibility
+np.random.seed(42)
+
+# Population parameters
+population_size = 100000  # Size of the population dataset
+num_samples = 10000  # Number of samples to draw
+sample_sizes = [5, 10, 30, 50]  # Different sample sizes to test
+
+# Generate populations
+uniform_pop = np.random.uniform(low=0, high=10, size=population_size)  # Uniform [0, 10]
+exponential_pop = np.random.exponential(scale=1, size=population_size)  # Exponential, mean = 1
+binomial_pop = np.random.binomial(n=10, p=0.5, size=population_size)  # Binomial, n=10, p=0.5
+
+# Store populations and their theoretical parameters
+distributions = {
+    'Uniform': {'data': uniform_pop, 'mean': 5, 'variance': 100/12},
+    'Exponential': {'data': exponential_pop, 'mean': 1, 'variance': 1},
+    'Binomial': {'data': binomial_pop, 'mean': 5, 'variance': 2.5}
+}
+
+# Simulate sampling distributions
+for dist_name, dist_info in distributions.items():
+    pop_data = dist_info['data']
+    theoretical_mean = dist_info['mean']
+    theoretical_variance = dist_info['variance']
+
+    # Plotting setup
+    plt.figure(figsize=(12, 8))
+
+    for i, n in enumerate(sample_sizes, 1):
+        # Draw num_samples samples of size n and compute their means
+        sample_means = []
+        for _ in range(num_samples):
+            sample = np.random.choice(pop_data, size=n, replace=True)
+            sample_means.append(np.mean(sample))
+
+        # Plot histogram of sample means
+        plt.subplot(2, 2, i)
+        sns.histplot(sample_means, bins=50, stat='density', kde=True, label=f'n = {n}')
+        plt.axvline(theoretical_mean, color='red', linestyle='--', label='Population Mean')
+        plt.title(f'{dist_name} Distribution, n = {n}')
+        plt.xlabel('Sample Mean')
+        plt.ylabel('Density')
+        plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+    # Print empirical mean and variance of sample means for largest sample size
+    sample_means_n50 = [np.mean(np.random.choice(pop_data, size=50, replace=True)) for _ in range(num_samples)]
+    empirical_mean = np.mean(sample_means_n50)
+    empirical_variance = np.var(sample_means_n50)
+    theoretical_variance_n50 = theoretical_variance / 50
+    print(f"\n{dist_name} Distribution (n = 50):")
+    print(f"Empirical Mean of Sample Means: {empirical_mean:.3f}, Theoretical: {theoretical_mean:.3f}")
+    print(f"Empirical Variance of Sample Means: {empirical_variance:.3f}, Theoretical: {theoretical_variance_n50:.3f}")
+</code></pre>
+<p><img alt="alt text" src="image.png"/>
+<img alt="alt text" src="image-1.png"/>
+<img alt="alt text" src="image-2.png"/>
+<em>Notes on Code</em>:
+- <strong>Populations</strong>: Generates large datasets for Uniform, Exponential, and Binomial distributions.
+- <strong>Sampling</strong>: For each distribution and sample size, draws 10,000 samples and computes their means.
+- <strong>Visualization</strong>: Plots histograms with a kernel density estimate (KDE) to show the shape of the sampling distribution, with the theoretical population mean marked.
+- <strong>Statistics</strong>: Compares empirical mean and variance of sample means (for <span class="arithmatex">\(n=50\)</span>) to theoretical values.</p>
+<h2 id="4-parameter-exploration">4. Parameter Exploration</h2>
+<p><em>Notes</em>: Let’s analyze the results from the plots and statistics.</p>
+<ul>
+<li><strong>Shape of the Original Distribution</strong>:</li>
+<li><strong>Uniform</strong>: The population is symmetric but flat. Even at <span class="arithmatex">\(n=5\)</span>, the sample means look somewhat bell-shaped, and by <span class="arithmatex">\(n=30\)</span>, the distribution is very close to normal.</li>
+<li><strong>Exponential</strong>: The population is heavily right-skewed. At <span class="arithmatex">\(n=5\)</span>, the sample means are still skewed, but by <span class="arithmatex">\(n=30\)</span>, the distribution approaches normality, and at <span class="arithmatex">\(n=50\)</span>, it’s nearly normal.</li>
+<li>
+<p><strong>Binomial</strong>: The population (with <span class="arithmatex">\(n_{\text{trials}}=10, p=0.5\)</span>) is discrete and symmetric. The sample means approach normality faster than the Exponential case, being nearly normal by <span class="arithmatex">\(n=10\)</span>.</p>
+</li>
+<li>
+<p><strong>Sample Size and Convergence</strong>:</p>
+</li>
+<li>For all distributions, as <span class="arithmatex">\(n\)</span> increases, the sampling distribution becomes more normal, confirming the CLT.</li>
+<li>
+<p>The Exponential distribution (highly skewed) converges more slowly, requiring a larger <span class="arithmatex">\(n\)</span> (around 30–50) to look normal, while the Uniform and Binomial distributions (more symmetric) converge faster (around <span class="arithmatex">\(n=10\)</span>).</p>
+</li>
+<li>
+<p><strong>Impact of Population Variance</strong>:</p>
+</li>
+<li>The variance of the sample means is <span class="arithmatex">\(\sigma_{\bar{X}}^2 = \frac{\sigma^2}{n}\)</span>.</li>
+<li><strong>Uniform</strong>: <span class="arithmatex">\(\sigma^2 \approx 8.33\)</span>, so for <span class="arithmatex">\(n=50\)</span>, <span class="arithmatex">\(\sigma_{\bar{X}}^2 \approx \frac{8.33}{50} \approx 0.167\)</span>. The spread of the histogram narrows as <span class="arithmatex">\(n\)</span> increases.</li>
+<li><strong>Exponential</strong>: <span class="arithmatex">\(\sigma^2 = 1\)</span>, so for <span class="arithmatex">\(n=50\)</span>, <span class="arithmatex">\(\sigma_{\bar{X}}^2 = \frac{1}{50} = 0.02\)</span>. The spread is smaller than the Uniform case due to lower population variance.</li>
+<li><strong>Binomial</strong>: <span class="arithmatex">\(\sigma^2 = 2.5\)</span>, so for <span class="arithmatex">\(n=50\)</span>, <span class="arithmatex">\(\sigma_{\bar{X}}^2 = \frac{2.5}{50} = 0.05\)</span>. The spread is between the Uniform and Exponential cases.</li>
+<li>The empirical variances match the theoretical values closely, confirming the CLT’s prediction about the spread.</li>
+</ul>
+<p><em>Notes</em>: The CLT holds across all distributions, but the rate of convergence depends on the population’s shape (skewness) and variance.</p>
+<h2 id="5-practical-applications">5. Practical Applications</h2>
+<p><em>Notes</em>:
+- <strong>Estimating Population Parameters</strong>: In surveys, we often estimate a population mean (e.g., average income) from a sample. The CLT ensures that the sample mean is approximately normal, allowing us to construct confidence intervals (e.g., <span class="arithmatex">\(\bar{X} \pm z \cdot \frac{\sigma}{\sqrt{n}}\)</span>) even if the population isn’t normal.
+- <strong>Quality Control in Manufacturing</strong>: In manufacturing, we might measure the diameter of produced items. The CLT allows us to use the sample mean to test if the process is within specifications, assuming normality of the sample mean for large <span class="arithmatex">\(n\)</span>.
+- <strong>Predicting Outcomes in Financial Models</strong>: In finance, returns on assets are often non-normal (e.g., heavy-tailed). The CLT lets us model the average return over many periods as normal, aiding in risk assessment and portfolio optimization.</p>
+<p><em>Notes</em>: The CLT is powerful because it applies to a wide range of scenarios, enabling statistical inference even when the underlying population distribution is unknown or non-normal.</p>
+<hr/>
+<h3 id="rendering-and-running-in-vs-code">Rendering and Running in VS Code</h3>
+<ul>
+<li><strong>File</strong>: Save as <code>central_limit_theorem.md</code>.</li>
+<li><strong>Rendering</strong>: Use the "Markdown+Math" extension; preview with <code>Ctrl+Shift+V</code> to see equations like <span class="arithmatex">\(\mu_{\bar{X}}\)</span> and <span class="arithmatex">\(<span class="arithmatex">\(\sigma_{\bar{X}}^2\)</span>\)</span>.</li>
+<li><strong>Code</strong>: Extract to <code>central_limit_theorem.py</code> or use a <code>.ipynb</code> with the "Jupyter" extension.</li>
+<li><strong>Requirements</strong>: Install <code>numpy</code>, <code>matplotlib</code>, and <code>seaborn</code> (<code>pip install numpy matplotlib seaborn</code>).</li>
+</ul>
+<h3 id="output-notes">Output Notes</h3>
+<ul>
+<li><strong>Plots</strong>: For each distribution (Uniform, Exponential, Binomial), four histograms show the sampling distribution of the sample mean for <span class="arithmatex">\(n=5, 10, 30, 50\)</span>. The red dashed line marks the population mean, and the KDE curve shows the shape approaching normality.</li>
+<li><strong>Statistics</strong>: Empirical mean and variance of sample means (for <span class="arithmatex">\(n=50\)</span>) match theoretical predictions, validating the CLT.</li>
+</ul>
+<p>This solution provides a clear demonstration of the CLT through simulations, with visualizations and practical insights. Let me know if you’d like to explore other distributions or adjust parameters!</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
