@@ -172,6 +172,212 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="measuring-earths-gravitational-acceleration-with-a-pendulum">Measuring Earth's Gravitational Acceleration with a Pendulum</h1>
+<h2 id="1-procedure-and-data-collection">1. Procedure and Data Collection</h2>
+<p><em>Notes</em>: We’re tasked with measuring the acceleration due to gravity <span class="arithmatex">\(g\)</span> using a simple pendulum. The period <span class="arithmatex">\(T\)</span> of a simple pendulum (for small angles) is given by:
+$<span class="arithmatex">\(T = 2\pi \sqrt{\frac{L}{g}}\)</span>$
+where <span class="arithmatex">\(L\)</span> is the length of the pendulum, and <span class="arithmatex">\(g\)</span> is the gravitational acceleration. Solving for <span class="arithmatex">\(g\)</span>:
+$<span class="arithmatex">\(g = \frac{4\pi^2 L}{T^2}\)</span>$</p>
+<h3 id="11-materials-and-setup">1.1 Materials and Setup</h3>
+<ul>
+<li><strong>String Length</strong>: Let’s assume a length of <span class="arithmatex">\(L = 1.0\)</span> m (1 meter).</li>
+<li><strong>Weight</strong>: A small bag of coins.</li>
+<li><strong>Measuring Tools</strong>:</li>
+<li>Ruler with a resolution of 1 mm (0.001 m), so uncertainty in length <span class="arithmatex">\(\delta L = \frac{\text{resolution}}{2} = 0.0005\)</span> m.</li>
+<li>Stopwatch with a resolution of 0.01 s, so uncertainty in a single time measurement <span class="arithmatex">\(\delta t_{\text{res}} = 0.005\)</span> s.</li>
+<li><strong>Setup</strong>: The weight is attached to the string, and the string is fixed to a support. The length <span class="arithmatex">\(L\)</span> is measured from the suspension point to the center of the weight.</li>
+</ul>
+<p><em>Notes</em>: The measured length is <span class="arithmatex">\(L = 1.0 \pm 0.0005\)</span> m.</p>
+<h3 id="12-data-collection">1.2 Data Collection</h3>
+<p><em>Notes</em>: We displace the pendulum by a small angle (&lt;15°) and measure the time for 10 full oscillations, repeating this 10 times. Let’s simulate realistic data for the time of 10 oscillations (<span class="arithmatex">\(t_{10}\)</span>), assuming a true <span class="arithmatex">\(g \approx 9.81\)</span> m/s² and adding some random variation to mimic human timing errors.</p>
+<p>First, calculate the expected period <span class="arithmatex">\(T\)</span> for <span class="arithmatex">\(L = 1.0\)</span> m and <span class="arithmatex">\(g = 9.81\)</span> m/s²:
+$<span class="arithmatex">\(T = 2\pi \sqrt{\frac{1.0}{9.81}} \approx 2\pi \sqrt{0.1019} \approx 2\pi \cdot 0.3192 \approx 2.006 \, \text{s}\)</span>$
+Time for 10 oscillations: <span class="arithmatex">\(t_{10} = 10 \cdot T \approx 20.06\)</span> s.</p>
+<p>Simulate 10 measurements with a mean of 20.06 s and a standard deviation of 0.1 s (to account for human reaction time variability):</p>
+<table>
+<thead>
+<tr>
+<th>Trial</th>
+<th>Time for 10 Oscillations, <span class="arithmatex">\(t_{10}\)</span> (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>20.05</td>
+</tr>
+<tr>
+<td>2</td>
+<td>20.12</td>
+</tr>
+<tr>
+<td>3</td>
+<td>19.98</td>
+</tr>
+<tr>
+<td>4</td>
+<td>20.07</td>
+</tr>
+<tr>
+<td>5</td>
+<td>20.15</td>
+</tr>
+<tr>
+<td>6</td>
+<td>20.03</td>
+</tr>
+<tr>
+<td>7</td>
+<td>20.09</td>
+</tr>
+<tr>
+<td>8</td>
+<td>20.00</td>
+</tr>
+<tr>
+<td>9</td>
+<td>20.14</td>
+</tr>
+<tr>
+<td>10</td>
+<td>20.06</td>
+</tr>
+</tbody>
+</table>
+<p><em>Notes</em>: These values are generated to be realistic, with slight variations due to timing errors.</p>
+<h2 id="2-calculations">2. Calculations</h2>
+<h3 id="21-calculate-the-period">2.1 Calculate the Period</h3>
+<ul>
+<li>
+<p><strong>Mean Time for 10 Oscillations</strong>:
+  $<span class="arithmatex">\(\bar{t}_{10} = \frac{20.05 + 20.12 + 19.98 + 20.07 + 20.15 + 20.03 + 20.09 + 20.00 + 20.14 + 20.06}{10} = \frac{200.69}{10} = 20.069 \, \text{s}\)</span>$</p>
+</li>
+<li>
+<p><strong>Standard Deviation of <span class="arithmatex">\(t_{10}\)</span></strong>:
+  First, compute the variance:
+  $<span class="arithmatex">\(\sigma_{t_{10}}^2 = \frac{1}{10-1} \sum_{i=1}^{10} (t_{10,i} - \bar{t}_{10})^2\)</span>$
+  Deviations: <span class="arithmatex">\((20.05 - 20.069)^2 = (-0.019)^2 = 0.000361\)</span>, <span class="arithmatex">\((20.12 - 20.069)^2 = 0.051^2 = 0.002601\)</span>, ..., <span class="arithmatex">\((20.06 - 20.069)^2 = (-0.009)^2 = 0.000081\)</span>.
+  Sum of squared deviations: <span class="arithmatex">\(0.000361 + 0.002601 + 0.004761 + 0.000169 + 0.006561 + 0.000529 + 0.000441 + 0.004761 + 0.005041 + 0.000081 = 0.025306\)</span>.
+  $<span class="arithmatex">\(\sigma_{t_{10}}^2 = \frac{0.025306}{9} \approx 0.0028118, \quad \sigma_{t_{10}} = \sqrt{0.0028118} \approx 0.0530 \, \text{s}\)</span>$</p>
+</li>
+<li>
+<p><strong>Uncertainty in the Mean Time</strong>:
+  $<span class="arithmatex">\(u_{\bar{t}_{10}} = \frac{\sigma_{t_{10}}}{\sqrt{N}} = \frac{0.0530}{\sqrt{10}} \approx \frac{0.0530}{3.162} \approx 0.0168 \, \text{s}\)</span>$</p>
+</li>
+<li>
+<p><strong>Period <span class="arithmatex">\(T\)</span> and Its Uncertainty</strong>:
+  $<span class="arithmatex">\(T = \frac{\bar{t}_{10}}{10} = \frac{20.069}{10} = 2.0069 \, \text{s}\)</span>$
+  $<span class="arithmatex">\(u_T = \frac{u_{\bar{t}_{10}}}{10} = \frac{0.0168}{10} = 0.00168 \, \text{s}\)</span>$</p>
+</li>
+</ul>
+<p><em>Notes</em>: So, <span class="arithmatex">\(T = 2.0069 \pm 0.00168\)</span> s.</p>
+<h3 id="22-determine-g">2.2 Determine <span class="arithmatex">\(g\)</span></h3>
+<p>Using the formula:
+$<span class="arithmatex">\(g = \frac{4\pi^2 L}{T^2}\)</span>$
+- <span class="arithmatex">\(4\pi^2 \approx 4 \times 9.8696 = 39.4784\)</span>
+- <span class="arithmatex">\(L = 1.0\)</span> m
+- <span class="arithmatex">\(T = 2.0069\)</span> s, so <span class="arithmatex">\(T^2 = (2.0069)^2 \approx 4.0276\)</span>
+$<span class="arithmatex">\(g = \frac{39.4784 \times 1.0}{4.0276} \approx 9.803 \, \text{m/s}^2\)</span>$</p>
+<h3 id="23-propagate-uncertainties">2.3 Propagate Uncertainties</h3>
+<p>The relative uncertainty in <span class="arithmatex">\(g\)</span> comes from uncertainties in <span class="arithmatex">\(L\)</span> and <span class="arithmatex">\(T\)</span>. Using the formula for error propagation:
+$<span class="arithmatex">\(\frac{\delta g}{g} = \sqrt{\left(\frac{\delta L}{L}\right)^2 + \left(\frac{2 \delta T}{T}\right)^2}\)</span>$
+- <strong>Relative uncertainty in <span class="arithmatex">\(L\)</span></strong>:
+  $<span class="arithmatex">\(\frac{\delta L}{L} = \frac{0.0005}{1.0} = 0.0005\)</span>$
+- <strong>Relative uncertainty in <span class="arithmatex">\(T\)</span></strong>:
+  $<span class="arithmatex">\(\frac{\delta T}{T} = \frac{0.00168}{2.0069} \approx 0.000837\)</span>$
+  So, <span class="arithmatex">\(\frac{2 \delta T}{T} = 2 \times 0.000837 \approx 0.001674\)</span>.
+- <strong>Total relative uncertainty</strong>:
+  $<span class="arithmatex">\(\frac{\delta g}{g} = \sqrt{(0.0005)^2 + (0.001674)^2} = \sqrt{0.00000025 + 0.000002802} = \sqrt{0.000003052} \approx 0.001747\)</span>$
+- <strong>Absolute uncertainty in <span class="arithmatex">\(g\)</span></strong>:
+  $<span class="arithmatex">\(\delta g = g \cdot \frac{\delta g}{g} = 9.803 \times 0.001747 \approx 0.0171 \, \text{m/s}^2\)</span>$</p>
+<p><em>Notes</em>: So, <span class="arithmatex">\(g = 9.803 \pm 0.017\)</span> m/s².</p>
+<h2 id="3-analysis">3. Analysis</h2>
+<h3 id="31-comparison-with-standard-value">3.1 Comparison with Standard Value</h3>
+<p>The standard value of <span class="arithmatex">\(g\)</span> at Earth’s surface is approximately <span class="arithmatex">\(g_{\text{standard}} = 9.81\)</span> m/s² (though it varies slightly with location, e.g., 9.80665 m/s² at sea level). Our measured value is:
+$<span class="arithmatex">\(g = 9.803 \pm 0.017 \, \text{m/s}^2\)</span>$
+- The standard value 9.81 lies within the uncertainty range (9.786 to 9.820), so our measurement is consistent with the expected value.
+- The difference is <span class="arithmatex">\(9.81 - 9.803 = 0.007\)</span> m/s², which is less than the uncertainty, indicating good agreement.</p>
+<h3 id="32-discussion-on-uncertainties-and-limitations">3.2 Discussion on Uncertainties and Limitations</h3>
+<ul>
+<li><strong>Effect of Measurement Resolution on <span class="arithmatex">\(L\)</span></strong>:</li>
+<li>The ruler’s resolution (1 mm) gives <span class="arithmatex">\(\delta L = 0.0005\)</span> m, contributing a relative uncertainty of 0.0005 (0.05%). This is small but non-negligible. A more precise tool (e.g., a caliper with 0.1 mm resolution) would reduce <span class="arithmatex">\(\delta L\)</span> to 0.00005 m, lowering the contribution to <span class="arithmatex">\(\delta g\)</span>.</li>
+<li>
+<p>If <span class="arithmatex">\(L\)</span> were measured incorrectly (e.g., not to the center of mass), it could introduce a systematic error, biasing <span class="arithmatex">\(g\)</span>.</p>
+</li>
+<li>
+<p><strong>Variability in Timing and Its Impact on <span class="arithmatex">\(T\)</span></strong>:</p>
+</li>
+<li>The standard deviation of <span class="arithmatex">\(t_{10}\)</span> (0.0530 s) reflects variability in timing, likely due to human reaction time. The uncertainty in the mean <span class="arithmatex">\(u_{\bar{t}_{10}} = 0.0168\)</span> s translates to <span class="arithmatex">\(u_T = 0.00168\)</span> s, contributing a relative uncertainty in <span class="arithmatex">\(T\)</span> of 0.000837. Since <span class="arithmatex">\(g \propto \frac{1}{T^2}\)</span>, this uncertainty is doubled in <span class="arithmatex">\(g\)</span>, making timing the dominant source of error (0.001674 vs. 0.0005 from <span class="arithmatex">\(L\)</span>).</li>
+<li>
+<p>Using a stopwatch with better resolution or automating the timing (e.g., with a photogate) would reduce this uncertainty.</p>
+</li>
+<li>
+<p><strong>Assumptions and Experimental Limitations</strong>:</p>
+</li>
+<li><strong>Small Angle Approximation</strong>: The formula <span class="arithmatex">\(T = 2\pi \sqrt{\frac{L}{g}}\)</span> assumes small angles (&lt;15°). Larger angles introduce nonlinear effects, increasing the period and underestimating <span class="arithmatex">\(g\)</span>. We kept the angle small, but any deviation could cause a systematic error.</li>
+<li><strong>Air Resistance and Friction</strong>: The model assumes no air resistance or friction at the pivot. In reality, these dampen the oscillations, slightly increasing the measured period and underestimating <span class="arithmatex">\(g\)</span>. This effect is small for a short experiment but could be significant over many oscillations.</li>
+<li><strong>Length to Center of Mass</strong>: We assumed <span class="arithmatex">\(L\)</span> is measured to the center of the weight. If the weight is not a point mass, the effective length may differ, introducing a systematic error.</li>
+<li><strong>Local Variations in <span class="arithmatex">\(g\)</span></strong>: The true <span class="arithmatex">\(g\)</span> varies with altitude and latitude (e.g., 9.78 m/s² at the equator, 9.83 m/s² at the poles). Our comparison assumes a nominal 9.81 m/s², but the actual local value may differ slightly.</li>
+</ul>
+<p><em>Notes</em>: The primary sources of uncertainty are the timing variability and, to a lesser extent, the length measurement. Systematic errors (e.g., angle, air resistance) are likely small but could explain the slight deviation from 9.81 m/s².</p>
+<h2 id="4-deliverables">4. Deliverables</h2>
+<h3 id="41-tabulated-data">4.1 Tabulated Data</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Length <span class="arithmatex">\(L\)</span> (m)</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Uncertainty in <span class="arithmatex">\(L\)</span>, <span class="arithmatex">\(\delta L\)</span> (m)</td>
+<td>0.0005</td>
+</tr>
+<tr>
+<td>Mean time for 10 oscillations, <span class="arithmatex">\(\bar{t}_{10}\)</span> (s)</td>
+<td>20.069</td>
+</tr>
+<tr>
+<td>Standard deviation of <span class="arithmatex">\(t_{10}\)</span>, <span class="arithmatex">\(\sigma_{t_{10}}\)</span> (s)</td>
+<td>0.0530</td>
+</tr>
+<tr>
+<td>Uncertainty in mean time, <span class="arithmatex">\(u_{\bar{t}_{10}}\)</span> (s)</td>
+<td>0.0168</td>
+</tr>
+<tr>
+<td>Period <span class="arithmatex">\(T\)</span> (s)</td>
+<td>2.0069</td>
+</tr>
+<tr>
+<td>Uncertainty in <span class="arithmatex">\(T\)</span>, <span class="arithmatex">\(u_T\)</span> (s)</td>
+<td>0.00168</td>
+</tr>
+<tr>
+<td>Calculated <span class="arithmatex">\(g\)</span> (m/s²)</td>
+<td>9.803</td>
+</tr>
+<tr>
+<td>Uncertainty in <span class="arithmatex">\(g\)</span>, <span class="arithmatex">\(\delta g\)</span> (m/s²)</td>
+<td>0.017</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Measurements of <span class="arithmatex">\(t_{10}\)</span> (s)</strong>: 20.05, 20.12, 19.98, 20.07, 20.15, 20.03, 20.09, 20.00, 20.14, 20.06.</p>
+<h3 id="42-discussion">4.2 Discussion</h3>
+<p>The experiment successfully measured <span class="arithmatex">\(g\)</span> as <span class="arithmatex">\(9.803 \pm 0.017\)</span> m/s², consistent with the standard value of 9.81 m/s². The uncertainty is dominated by timing variability, which could be reduced with better timing methods. Systematic errors, such as the small angle assumption and air resistance, may contribute to the slight deviation but are within the uncertainty range. Improving measurement precision (e.g., using a caliper for <span class="arithmatex">\(L\)</span>, automating timing) and controlling experimental conditions (e.g., minimizing air resistance) would enhance accuracy.</p>
+<hr/>
+<h3 id="rendering-in-vs-code">Rendering in VS Code</h3>
+<ul>
+<li><strong>File</strong>: Save as <code>measure_gravity_pendulum.md</code>.</li>
+<li><strong>Rendering</strong>: Use the "Markdown+Math" extension; preview with <code>Ctrl+Shift+V</code> to see equations like <span class="arithmatex">\(T\)</span> and $<span class="arithmatex">\(g\)</span>$.</li>
+</ul>
+<p>This solution provides a detailed, realistic simulation of the experiment, with calculations, uncertainty analysis, and a thorough discussion. Let me know if you’d like to adjust the data or explore additional factors!</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
