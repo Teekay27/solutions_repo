@@ -78,6 +78,8 @@ df
 ![alt text](image-9.png)
 ![alt text](image-11.png)
 
-import numpy as np
-import matplotlib.pyplot as plt
+
+
+
+
 
