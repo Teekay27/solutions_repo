@@ -1,10 +1,15 @@
 # Problem 3
 
+
+---
+
 # Trajectories of a Freely Released Payload Near Earth
 
 ## 1. Analysis of Possible Trajectories
 
 *Notes*: When a payload is released from a moving rocket near Earth, its path depends on its starting position, speed, direction, and Earth’s gravity. Let’s explore the possible paths it might take.
+
+
 
 - **Types of Trajectories**: The path of an object under gravity is a conic section, determined by its energy:
 
