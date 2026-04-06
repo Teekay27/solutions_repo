@@ -191,7 +191,7 @@
 </li>
 <li><strong>Series Reduction</strong>: If a node has exactly two neighbors (degree 2), the resistors are in series. Replace the two resistors <span class="arithmatex">\(R_1\)</span> and <span class="arithmatex">\(R_2\)</span> with a single resistor <span class="arithmatex">\(R_{\text{eq}} = R_1 + R_2\)</span>, removing the intermediate node.</li>
 <li><strong>Parallel Reduction</strong>: If there are multiple edges between two nodes, the resistors are in parallel. Replace them with a single resistor using the parallel formula: for resistors <span class="arithmatex">\(R_1, R_2, \ldots, R_n\)</span>, the equivalent resistance is:
-     <span class="arithmatex">\(<span class="arithmatex">\(\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \cdots + \frac{1}{R_n} \implies R_{\text{eq}} = \left( \sum_{i=1}^n \frac{1}{R_i} \right)^{-1}\)</span>\)</span></li>
+     $<span class="arithmatex">\(\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \cdots + \frac{1}{R_n} \implies R_{\text{eq}} = \left( \sum_{i=1}^n \frac{1}{R_i} \right)^{-1}\)</span>$</li>
 <li>
 <p>Repeat until the graph is reduced to a single edge between the source and sink.</p>
 </li>
@@ -383,7 +383,7 @@ print("\n".join(steps3))
 <h3 id="rendering-and-running-in-vs-code">Rendering and Running in VS Code</h3>
 <ul>
 <li><strong>File</strong>: Save as <code>equivalent_resistance.md</code>.</li>
-<li><strong>Rendering</strong>: Use the "Markdown+Math" extension; preview with <code>Ctrl+Shift+V</code> to see equations like <span class="arithmatex">\(R_{\text{eq}}\)</span> and <span class="arithmatex">\(<span class="arithmatex">\(\frac{1}{R_{\text{eq}}}\)</span>\)</span>.</li>
+<li><strong>Rendering</strong>: Use the "Markdown+Math" extension; preview with <code>Ctrl+Shift+V</code> to see equations like <span class="arithmatex">\(R_{\text{eq}}\)</span> and $<span class="arithmatex">\(\frac{1}{R_{\text{eq}}}\)</span>$.</li>
 <li><strong>Code</strong>: Extract to <code>equivalent_resistance.py</code> or use a <code>.ipynb</code> with the "Jupyter" extension.</li>
 <li><strong>Requirements</strong>: Install <code>networkx</code> and <code>matplotlib</code> (<code>pip install networkx matplotlib</code>).</li>
 </ul>

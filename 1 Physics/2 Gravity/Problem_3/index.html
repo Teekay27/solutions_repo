@@ -205,7 +205,7 @@
 <ul>
 <li><strong>Gravity Force</strong>: Earth pulls the payload toward its center. The force on the payload (mass <span class="arithmatex">\(m\)</span>) at distance <span class="arithmatex">\(r\)</span> from Earth’s center (mass <span class="arithmatex">\(M\)</span>) is given by Newton’s law of gravitation:</li>
 </ul>
-<p><span class="arithmatex">\(<span class="arithmatex">\(F = \frac{G M m}{r^2}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(F = \frac{G M m}{r^2}\)</span>$</p>
 <p>Here, <span class="arithmatex">\(G\)</span> is the gravitational constant.</p>
 <ul>
 <li><strong>Motion Equations</strong>: We’ll use coordinates  </li>
@@ -213,15 +213,15 @@
 <p><span class="arithmatex">\((x, y)\)</span> </p>
 <p>in a 2D plane, with Earth at <span class="arithmatex">\((0, 0)\)</span>. The distance 
   <span class="arithmatex">\(r\)</span> is:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(r = \sqrt{x^2 + y^2}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(r = \sqrt{x^2 + y^2}\)</span>$</p>
 <p>The gravitational force causes acceleration toward the center, split into </p>
 <p><span class="arithmatex">\(x\)</span> and
    <span class="arithmatex">\(y\)</span> directions:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(a_x = -\frac{G M x}{r^3}, \quad a_y = -\frac{G M y}{r^3}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(a_x = -\frac{G M x}{r^3}, \quad a_y = -\frac{G M y}{r^3}\)</span>$</p>
 <p>This gives us equations for how <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> change over time:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(\frac{d^2 x}{dt^2} = -\frac{G M x}
+<p>$<span class="arithmatex">\(\frac{d^2 x}{dt^2} = -\frac{G M x}
   {(x^2 + y^2)^{3/2}}, \quad \frac{d^2 y}
-  {dt^2} = -\frac{G M y}{(x^2 + y^2)^{3/2}}\)</span>\)</span></p>
+  {dt^2} = -\frac{G M y}{(x^2 + y^2)^{3/2}}\)</span>$</p>
 <ul>
 <li><strong>Energy to Classify the Path</strong>: We can determine the trajectory by calculating the specific energy </li>
 </ul>
@@ -237,7 +237,7 @@
 </li>
 <li>
 <p>Total specific energy:
-    <span class="arithmatex">\(<span class="arithmatex">\(\epsilon = \frac{1}{2} v^2 - \frac{G M}{r}\)</span>\)</span></p>
+    $<span class="arithmatex">\(\epsilon = \frac{1}{2} v^2 - \frac{G M}{r}\)</span>$</p>
 </li>
 <li>
 <p>Trajectory type:</p>
@@ -258,7 +258,7 @@
 </li>
 </ul>
 <p><span class="arithmatex">\(r\)</span> is when <span class="arithmatex">\(\epsilon = 0\)</span>:
-  <span class="arithmatex">\(<span class="arithmatex">\(\frac{1}{2} v_{\text{esc}}^2 - \frac{G M}{r} = 0 \implies v_{\text{esc}} = \sqrt{\frac{2 G M}{r}}\)</span>\)</span></p>
+  $<span class="arithmatex">\(\frac{1}{2} v_{\text{esc}}^2 - \frac{G M}{r} = 0 \implies v_{\text{esc}} = \sqrt{\frac{2 G M}{r}}\)</span>$</p>
 <p><em>Notes</em>: These equations are complex to solve analytically, so we’ll use numerical methods to simulate the payload’s path.</p>
 <h2 id="3-numerical-analysis-setup">3. Numerical Analysis Setup</h2>
 <p><em>Notes</em>: Let’s define the starting conditions for the payload to simulate different trajectories.</p>
@@ -294,29 +294,29 @@
   The escape velocity at distance <span class="arithmatex">\(r\)</span> is:</p>
 </li>
 </ul>
-<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{esc}} = \sqrt{\frac{2 G M}{r}}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(v_{\text{esc}} = \sqrt{\frac{2 G M}{r}}\)</span>$</p>
 <p>Substitute the values:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{esc}} = \sqrt{\frac{2 \times (6.6743 \times 10^{-11}) \times (5.972 \times 10^{24})}{6.771 \times 10^6}}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(v_{\text{esc}} = \sqrt{\frac{2 \times (6.6743 \times 10^{-11}) \times (5.972 \times 10^{24})}{6.771 \times 10^6}}\)</span>$</p>
 <p>Numerator:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(2 \times 6.6743 \times 10^{-11} \times 5.972 \times 10^{24} = 7.978 \times 10^{14}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(2 \times 6.6743 \times 10^{-11} \times 5.972 \times 10^{24} = 7.978 \times 10^{14}\)</span>$</p>
 <p>Fraction:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(\frac{7.978 \times 10^{14}}{6.771 \times 10^6} \approx 1.178 \times 10^8\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(\frac{7.978 \times 10^{14}}{6.771 \times 10^6} \approx 1.178 \times 10^8\)</span>$</p>
 <p>Square root:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{esc}} = \sqrt{1.178 \times 10^8} \approx 10,853 \, \text{m/s} = 10.85 \, \text{km/s}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(v_{\text{esc}} = \sqrt{1.178 \times 10^8} \approx 10,853 \, \text{m/s} = 10.85 \, \text{km/s}\)</span>$</p>
 <ul>
 <li><strong>Circular Orbit Velocity</strong> (first cosmic velocity at this altitude):
   The speed for a circular orbit at distance </li>
 </ul>
 <p><span class="arithmatex">\(r\)</span> is:
-  <span class="arithmatex">\(<span class="arithmatex">\(v_{\text{circ}} = \sqrt{\frac{G M}{r}}\)</span>\)</span></p>
+  $<span class="arithmatex">\(v_{\text{circ}} = \sqrt{\frac{G M}{r}}\)</span>$</p>
 <p>Substitute the values:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{circ}} = \sqrt{\frac{(6.6743 \times 10^{-11}) \times (5.972 \times 10^{24})}{6.771 \times 10^6}}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(v_{\text{circ}} = \sqrt{\frac{(6.6743 \times 10^{-11}) \times (5.972 \times 10^{24})}{6.771 \times 10^6}}\)</span>$</p>
 <p>Numerator:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(6.6743 \times 10^{-11} \times 5.972 \times 10^{24} = 3.989 \times 10^{14}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(6.6743 \times 10^{-11} \times 5.972 \times 10^{24} = 3.989 \times 10^{14}\)</span>$</p>
 <p>Fraction:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(\frac{3.989 \times 10^{14}}{6.771 \times 10^6} \approx 5.892 \times 10^7\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(\frac{3.989 \times 10^{14}}{6.771 \times 10^6} \approx 5.892 \times 10^7\)</span>$</p>
 <p>Square root:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(v_{\text{circ}} = \sqrt{5.892 \times 10^7} \approx 7,676 \, \text{m/s} = 7.68 \, \text{km/s}\)</span>\)</span></p>
+<p>$<span class="arithmatex">\(v_{\text{circ}} = \sqrt{5.892 \times 10^7} \approx 7,676 \, \text{m/s} = 7.68 \, \text{km/s}\)</span>$</p>
 <p><em>Notes</em>: We’ll simulate three trajectories:
 - Elliptical: 7.68 km/s (circular orbit speed).
 - Parabolic: 10.85 km/s (escape speed).
@@ -415,7 +415,7 @@ for i, v in enumerate(velocities):
 <h3 id="rendering-and-running-in-vs-code">Rendering and Running in VS Code</h3>
 <ul>
 <li><strong>File</strong>: Save as <code>payload_trajectories.md</code>.</li>
-<li><strong>Rendering</strong>: Use the "Markdown+Math" extension; preview with <code>Ctrl+Shift+V</code> to see equations like <span class="arithmatex">\(v_{\text{esc}}\)</span> and <span class="arithmatex">\(<span class="arithmatex">\(F\)</span>\)</span>.</li>
+<li><strong>Rendering</strong>: Use the "Markdown+Math" extension; preview with <code>Ctrl+Shift+V</code> to see equations like <span class="arithmatex">\(v_{\text{esc}}\)</span> and $<span class="arithmatex">\(F\)</span>$.</li>
 <li><strong>Code</strong>: Extract the Python code to <code>payload_trajectories.py</code> or use a <code>.ipynb</code> file with the "Jupyter" extension.</li>
 <li><strong>Requirements</strong>: Install <code>numpy</code>, <code>matplotlib</code>, and <code>scipy</code> (<code>pip install numpy matplotlib scipy</code>).</li>
 </ul>
